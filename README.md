@@ -1,8 +1,4 @@
 NAR (NewAlbumReporter)
 ===
 
-Bir Web Uygulaması olan NAR; sanatçı, albüm ve şarkılar ile ilgili 
-bilgileri toplayıp, kullanıcılara sunan bir yapı olacaktır.
-
-Yeni yapılan yorum, çıkan albümler vb. özellikleri takip edebilme 
-imkanı da sağlayacaktır.
+NAR is a django web application to collect information about artists, songs and albums, and to serve this database to users with a clean interface.
