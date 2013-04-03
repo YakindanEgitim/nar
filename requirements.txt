@@ -1,2 +1,0 @@
-django>=1.5
-django-bootstrap-toolkit>=2.8.0

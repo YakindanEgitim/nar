@@ -1,6 +1,7 @@
 *.py[co]
 .installed.cfg
 bin
+db
 develop-eggs
 dist
 downloads
