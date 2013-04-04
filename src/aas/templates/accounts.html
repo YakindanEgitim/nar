@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block nav%} {% endblock %}
+
+{% block content %}
+  
+<div class="row">
+
+  <div class="span4 offset1">
+
+    <form action="{% url 'register' %}" method="post">
+      {% csrf_token %}
+      {% include "includes/_form_snippet.html" with form=registration_form %}
+      <p><input type="submit" class="btn btn-primary" value="Register" /></p>
+    </form>
+  </div>
+
+  <div class="span4 offset2" >
+
+    <form action="{% url 'login' %}" method="post">
+      {% csrf_token %}
+      {% include "includes/_form_snippet.html" with form=login_form %}
+      <p><input type="submit" class="btn btn-primary" value="Login" /></p>
+    </form>
+  </div>
+
+  <div class="row">
+    <div class="span6 offset4">
+      <a href="{% url 'socialauth_begin' 'twitter' %}" class="btn btn-primary">Sign in with Twitter</a>
+      <a href="{% url 'socialauth_begin' 'facebook' %}" class="btn btn-primary">Sign in with Facebook</a>
+    </div>
+  </div>
+  
+</div>
+
+{% endblock %}

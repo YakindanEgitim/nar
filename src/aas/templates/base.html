@@ -28,7 +28,7 @@
   <div class="navbar-inner">
     <div class="container">
       <a class="brand" href="/">NAR</a>
-      {% block nav %} 
+      {% block nav %}
         {% if user.is_authenticated %}
           {% include 'includes/_base_user_nav.html' %}
         {% else %}
@@ -54,9 +54,11 @@
         <a href="#">Contact</a>
       </p>
     </div>
+    <!--
     <div class="span6" style="text-align:right">
       {% include 'includes/_social_buttons.html' %}
     </div>
+    -->
   </footer>
 
 </div>

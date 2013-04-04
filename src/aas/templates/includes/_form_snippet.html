@@ -1,0 +1,13 @@
+{% for field in form %}
+  <div class="fieldWrapper">
+      {{ field.label_tag }} 
+      {{ field }}
+      {% if field.errors %}
+        <ul>
+        {% for error in field.errors %}
+          <li><strong class="text-error">{{ error|escape }}</strong></li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+  </div>
+{% endfor %}
