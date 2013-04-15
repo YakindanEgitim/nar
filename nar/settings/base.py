@@ -122,6 +122,7 @@ INSTALLED_APPS = (
     'aas',
     'bootstrap_toolkit',
     'social_auth',
+    'storages',
 )
 
 AUTHENTICATION_BACKENDS = (
