@@ -1,6 +1,7 @@
 Django==1.5.1
 South==0.7.6
 argparse==1.2.1
+boto==2.8.0
 dj-database-url==0.2.1
 django-bootstrap-toolkit==2.11.0
 django-social-auth==0.7.22
