@@ -1,4 +1,9 @@
 import os
+from os.path import (abspath, join, dirname)
+
+go = lambda *x: join(abspath(dirname(__file__)), *x)
+PROJECT_ROOT = go('..', '..')
+root = lambda *x: join(abspath(PROJECT_ROOT), *x)
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -6,13 +11,12 @@ TEMPLATE_DEBUG = DEBUG
 ADMINS = (
     ('Ferhat Elmas', 'elmas.ferhat@gmail.com'),
 )
-
 MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.environ.get("TMPDIR", "/tmp/nar-db"),
+        'NAME': join(os.environ.get("TMPDIR", "/tmp"), "nar-db"),
         'USER': '',
         'PASSWORD': '',
         'HOST': '',
@@ -30,34 +34,12 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-# Absolute filesystem path to the directory that will hold user-uploaded files.
-# Example: "/var/www/example.com/media/"
-MEDIA_ROOT = ''
+MEDIA_ROOT = root('media')
+MEDIA_URL = '/media/'
 
-# URL that handles the media served from MEDIA_ROOT. Make sure to use a
-# trailing slash.
-# Examples: "http://example.com/media/", "http://media.example.com/"
-MEDIA_URL = ''
-
-# Absolute path to the directory static files should be collected to.
-# Don't put anything in this directory yourself; store your static files
-# in apps' "static/" subdirectories and in STATICFILES_DIRS.
-# Example: "/var/www/example.com/static/"
-STATIC_ROOT = ''
-
-# URL prefix for static files.
-# Example: "http://example.com/static/", "http://static.example.com/"
+STATIC_ROOT = root('static')
 STATIC_URL = '/static/'
-
-# Additional locations of static files
-STATICFILES_DIRS = (
-    # Put strings here, like "/home/html/static" or "C:/www/django/static".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-)
-
-# List of finder classes that know how to find static files in
-# various locations.
+STATICFILES_DIRS = (root('assets'))
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
@@ -66,10 +48,9 @@ STATICFILES_FINDERS = (
 
 # Make this unique, and don't share it with anybody.
 # For now, it is quite ok but later we must remove secret from git
-# See ../../scripts/generate_secret_key
+# See root('scripts/generate_secret_key')
 # SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 SECRET_KEY = 'mqu6)15)-f==q6b#1nyjw5cevb**)6hro5hl@bjl#*hv!kbkls'
-
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -89,16 +70,9 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'nar.urls'
-
-# Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'nar.wsgi.application'
 
-TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-)
-
+TEMPLATE_DIRS = (root('templates'))
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.auth.context_processors.auth",
     "django.core.context_processors.debug",
@@ -120,7 +94,9 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
     'aas',
+    'core',
     'bootstrap_toolkit',
+    'profiles',
     'social_auth',
     'storages',
 )

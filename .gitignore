@@ -1,10 +1,13 @@
 *.py[co]
 .installed.cfg
+.coverage
 bin
 db
 develop-eggs
 dist
 downloads
 eggs
+htmlcov/
 parts
+scripts/secret
 src/*.egg-info
