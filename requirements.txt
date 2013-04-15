@@ -1,6 +1,7 @@
 Django==1.5.1
 argparse==1.2.1
 dj-database-url==0.2.1
+django-bootstrap-toolkit==2.11.0
 django-social-auth==0.7.22
 django-socialauth==0.1.2c
 django-socialprofile==0.1.7
