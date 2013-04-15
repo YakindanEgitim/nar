@@ -1,0 +1,1 @@
+web: gunicorn nar.wsgi
