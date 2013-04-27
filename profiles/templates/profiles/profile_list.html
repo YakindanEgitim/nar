@@ -1,0 +1,52 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+  
+<div class="container">
+
+  <div class="span4 offset4">
+    <form action="{% url 'profile_search' %}" method="GET">
+      <input type="hidden" name="t" value="u" />
+      <input type="text" name="q" />
+      <p>
+        <input type="submit" class="btn btn-primary" value="Search" />
+      </p>
+    </form>
+  </div>
+
+  <div class="span4 offset4">
+  {% if object_list %}
+      <ul>
+      {% for p in object_list %}
+        <div class="row">
+          <img src="{{ MEDIA_URL }}{% if p.avatar %}{{ p.avatar }}{% else %}{{ DEFAULT_AVATAR }}{% endif %}" width="48" height="48"/>
+          <a href="{% url 'profile_detail' p.username %}">{{ p.username }}</a>
+        </div>
+      {% endfor %}
+      </ul>
+
+      {% if is_paginated %}
+          <div class="pagination">
+              <span class="page-links">
+                  {% if page_obj.has_previous %}
+                      <a href="?q={{ q }}&t={{ t }}&page={{ page_obj.previous_page_number }}">previous</a>
+                  {% endif %}
+                  <span class="page-current">
+                      Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                  </span>
+                  {% if page_obj.has_next %}
+                      <a href="?q={{ q }}&t={{ t }}&page={{ page_obj.next_page_number }}">next</a>
+                  {% endif %}
+              </span>
+          </div>
+      {% endif %}
+    {% else %}
+      {% if q %}
+        <p>No users, try again with different keyword</p>
+      {% endif %}
+    {% endif %}
+  </div>
+
+</div>
+
+{% endblock %}

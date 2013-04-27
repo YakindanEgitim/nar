@@ -1,0 +1,28 @@
+{% extends 'core/base.html' %}
+{% load i18n %}
+
+{% block content %}
+  
+<div class="container">
+  <div class="span4 offset4">
+
+    {% if profile %}
+      <img src="{{ MEDIA_URL }}{% if user.avatar %}{{ user.avatar }}{% else %}{{ DEFAULT_AVATAR }}{% endif %}"/>
+      
+      <ul>
+        <li>Username: {{ profile.username }}</li>
+        <li>First name: {{ profile.first_name }}
+        <li>Last name: {{ profile.last_name }}</li>
+        <li>Email: {{ profile.email }}</li>
+      <ul>
+
+      {% if editable %}
+        <a href="{% url 'profile_edit' %}" class="btn btn-primary">Edit Profile</a>
+      {% endif %}
+    {% else %}
+      <p>Nothing interesting is here for you!</p>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}
