@@ -1,0 +1,15 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="container">
+  <div class="span4 offset4"> 
+    <form action="" method="POST">
+      {% csrf_token %}
+      {% include "core/includes/_form_snippet.html" with form=form %}
+      <p>
+        <input type="submit" class="btn btn-primary" value="Send" />
+      </p>
+    </form>  
+  </div>
+</div>
+{% endblock %}

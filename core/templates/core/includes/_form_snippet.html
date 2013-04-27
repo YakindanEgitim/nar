@@ -1,0 +1,15 @@
+{# core/includes/_form_snippet.html #}
+
+{% for field in form %}
+  <div class="fieldWrapper">
+      <b>{{ field.label_tag }}</b>
+      {{ field }}
+      {% if field.errors %}
+        <ul>
+        {% for error in field.errors %}
+          <li><strong class="text-error">{{ error|escape }}</strong></li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+  </div>
+{% endfor %}

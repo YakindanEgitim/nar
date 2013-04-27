@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+{% load bootstrap_toolkit %}
+{% load i18n %}
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>
+    {% block title %} NAR - New Album Reporter {% endblock %}
+  </title>
+  <meta name="description" content="Open Music">
+  <meta name="author" content="ferhat">
+  <link href="http://fonts.googleapis.com/css?family=Noto+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="http://twitter.github.io/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet">
+  {% bootstrap_stylesheet_tag %}
+  <style type="text/css">
+    body {
+      padding-top: 60px;
+    }
+  </style>
+  <!--[if lt IE 9]>
+  <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+  {% bootstrap_javascript_tag %}
+  {% block extra_head %}{% endblock %}
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="/">NAR</a>
+      {% block nav %}
+        {% if user.is_authenticated %}
+          {% include 'includes/_base_user_nav.html' %}
+        {% else %}
+          {% include 'includes/_base_anonymous_nav.html' %}
+        {% endif %}
+      {% endblock %}
+    </div>
+  </div>
+</div>
+
+<div class="container" style="font-family: 'Noto Sans', serif;">
+
+  {% bootstrap_messages %}
+
+  {% block content %} Unfortunately, empty page! {% endblock %}
+
+  <p><hr></p>
+
+  <footer class="row">
+    <div class="span6">
+      <p>
+        <a href="/about/">About</a> | 
+        <a href="/contact/">Contact</a>
+      </p>
+    </div>
+    <!--
+    <div class="span6" style="text-align:right">
+      {% include 'includes/_social_buttons.html' %}
+    </div>
+    -->
+  </footer>
+
+</div>
+
+</body>
+</html>
