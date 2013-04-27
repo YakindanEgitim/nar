@@ -1,0 +1,42 @@
+{% extends "core/base.html" %}
+{% load i18n %}
+
+<!-- not tested  
+{% block app.scripts %}
+<script src="{{ MEDIA_URL }}js/jquery.formset.js"></script>
+<script type="text/javascript">
+$(function() {
+    $('.form-row.inline.{{ albumsong_formset.prefix }}').formset({
+        prefix: '{{ albumsong_formset.prefix }}',
+    })
+})
+</script>
+{% endblock %}
+-->
+
+{% block content %}
+<h1>Add Album</h1>
+<form action="." method="post">
+<div class="form-row">
+    {{ form.name.label_tag }}
+    {{ form.name }}
+    {{ form.name.errors }}
+</div>
+<fieldset class="formset">
+<legend>Songs</legend>
+    {{ albumsong_formset.management_form }}
+    {% for form in albumsong_formset %}
+    {{ form.id }}
+    <div class="form-row inline {{ albumsong_formset.prefix }}">
+        {{ form.name.label_tag }}
+        {{ form.name }}
+        {{ form.name.errors }}
+    </div>
+    {% endfor %}
+</fieldset>
+<div class="submit-row">
+    {% csrf_token %}
+    <input type="submit" class="btn btn-primary" value="Add album" />
+</div>
+</form>
+{% endblock %}
