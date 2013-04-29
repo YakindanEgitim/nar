@@ -8,6 +8,8 @@ dist
 downloads
 eggs
 htmlcov/
+media/
+!media/avatar/default.jpg
 parts
 scripts/secret
 src/*.egg-info
