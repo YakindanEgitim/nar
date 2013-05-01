@@ -7,7 +7,7 @@
   <div class="span4 offset4">
 
     {% if profile %}
-      <img src="{{ MEDIA_URL }}{% if user.avatar %}{{ user.avatar }}{% else %}{{ DEFAULT_AVATAR }}{% endif %}"/>
+      <img src="{{ profile.avatar_medium.url }}" />
       
       <ul>
         <li>Username: {{ profile.username }}</li>
