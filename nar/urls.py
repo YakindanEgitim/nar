@@ -9,7 +9,6 @@ urlpatterns = patterns('',
     url(r'^', include('social_auth.urls')),
     url(r'^', include('core.urls')),
     url(r'^profiles/', include('profiles.urls')),
-    url(r'^', include('aas.urls')),
+    url(r'^music/', include('music.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^photologue/', include('photologue.urls')),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
