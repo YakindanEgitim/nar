@@ -104,6 +104,7 @@ INSTALLED_APPS = (
     'core',
     'bootstrap_toolkit',
     'braces',
+    'imagekit',
     'music',
     'profiles',
     'social_auth',
