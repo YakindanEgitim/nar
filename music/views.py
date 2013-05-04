@@ -7,15 +7,45 @@ from django.utils.translation import ugettext as _
 from braces.views import LoginRequiredMixin
 
 from core.mixins import ActionMixin
+from profiles.models import Artist
 from .models import Album, Song
-from .forms import AlbumForm, AlbumSongFormSet
+from .forms import *
 
+
+class ArtistDetailView(DetailView):
+    model = Artist
+    template_name = "music/artist_detail.html"
+
+    def get_object(self, queryset=None):
+        pass
+
+
+class ArtistUpdateView(LoginRequiredMixin, ActionMixin, UpdateView):
+    model = Artist
+    template_name = "music/artist_edit.html"
+    action = _("Artist is successfully updated")
+
+    def get_object(self, queryset=None):
+        pass
+
+    def get_success_url(self):
+        pass
+
+
+class ArtistCreateView(LoginRequiredMixin, ActionMixin, CreateView):
+    model = Artist
+    form_class = ArtistForm
+    template_name = 'music/artist_add.html'
+    action = _("Artist is successfully added")
+
+    def form_valid(self, form):
+        pass
 
 class AlbumCreateView(LoginRequiredMixin, ActionMixin, CreateView):
     model = Album
     form_class = AlbumForm
     template_name = 'music/album_add.html'
-    action = _("Album is successfully created")
+    action = _("Album is successfully added")
 
     def form_valid(self, form):
         context = self.get_context_data()
@@ -62,6 +92,12 @@ class AlbumUpdateView(LoginRequiredMixin, ActionMixin, UpdateView):
     def get_success_url(self):
         pass
 
+
+class SongCreateView(CreateView):
+    model = Song
+    form_class = SongForm
+    template_name = 'music/song_add.html'
+    action = _("Song is successfully added")
 
 class SongDetailView(DetailView):
     model = Song

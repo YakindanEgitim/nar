@@ -21,5 +21,5 @@ class SongForm(ModelForm):
         model = Song
 
 # currently put default to extras but eventual values need to be defined later
-ArtistAlbumFormSet = inlineformset_factory(ArtistForm, Album, extra=50)
-AlbumSongFormSet = inlineformset_factory(AlbumForm, Song, extra=20)
+ArtistAlbumFormSet = inlineformset_factory(Artist, Album, form=ArtistForm, extra=50)
+AlbumSongFormSet = inlineformset_factory(Album, Song, form=AlbumForm, extra=20)
