@@ -41,6 +41,7 @@ class ArtistCreateView(LoginRequiredMixin, ActionMixin, CreateView):
     def form_valid(self, form):
         pass
 
+        
 class AlbumCreateView(LoginRequiredMixin, ActionMixin, CreateView):
     model = Album
     form_class = AlbumForm
@@ -64,9 +65,9 @@ class AlbumCreateView(LoginRequiredMixin, ActionMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super(AlbumCreateView, self).get_context_data(**kwargs)
         if self.request.POST:
-            context['albumsong_form'] = AlbumSongFormSet(self.request.POST)
+            context['albumsong_formset'] = AlbumSongFormSet(self.request.POST)
         else:
-            context['albumsong_form'] = AlbumSongFormSet()
+            context['albumsong_formset'] = AlbumSongFormSet()
         return context
 
     def get_success_url(self):

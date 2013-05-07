@@ -6,12 +6,12 @@ from core.models import AbstractTimeStampedModel
 
 
 class Genre(AbstractTimeStampedModel):
-    name = models.TextField()
+    name = models.CharField(max_length=100)
     slug = models.SlugField()
 
 
 class Album(AbstractTimeStampedModel):
-    name = models.TextField()
+    name = models.CharField(max_length=255)
     slug = models.SlugField()
     genres = models.ManyToManyField(Genre)
     artist = models.ForeignKey('profiles.Artist')
@@ -19,7 +19,7 @@ class Album(AbstractTimeStampedModel):
 
 
 class Song(AbstractTimeStampedModel):
-    name = models.TextField()
+    name = models.CharField(max_length=255)
     slug = models.SlugField()
     lyrics = models.TextField()
     genres = models.ManyToManyField(Genre)
