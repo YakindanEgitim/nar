@@ -13,7 +13,7 @@ class Genre(AbstractTimeStampedModel):
 class Album(AbstractTimeStampedModel):
     name = models.CharField(max_length=255)
     slug = models.SlugField()
-    genres = models.ManyToManyField(Genre)
+    genres = models.ManyToManyField(Genre, blank=True, null=True)
     artist = models.ForeignKey('profiles.Artist')
     groups = models.ForeignKey('profiles.MusicGroup')
 
@@ -22,5 +22,5 @@ class Song(AbstractTimeStampedModel):
     name = models.CharField(max_length=255)
     slug = models.SlugField()
     lyrics = models.TextField()
-    genres = models.ManyToManyField(Genre)
+    genres = models.ManyToManyField(Genre, blank=True, null=True)
     album = models.ForeignKey(Album)
