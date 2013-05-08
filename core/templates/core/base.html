@@ -32,6 +32,9 @@
   <div class="navbar-inner">
     <div class="container">
       <a class="brand" href="/">NAR</a>
+      <form class="navbar-search pull-left" action="/search">
+        <input type="text" class="search-query" name="q" placeholder="Search">
+      </form>
       {% block nav %}
         {% if user.is_authenticated %}
           {% include 'includes/_base_user_nav.html' %}

@@ -1,0 +1,28 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+<div class="span12"> 
+  {% if artist_list %}
+    <h3>Artists</h3>
+    {% for artist in artist_list %}
+      <p><a href="{url artist_detail artist.profile.username}">{{ artist.profile.username }}</a></p>
+    {% endfor %}
+    <hr>
+  {% endif %}
+ 
+  {% if album_list %}
+    <h3>Albums</h3>
+    {% for album in album_list %}
+      <p><a href="{url album_detail artist.username}">{{ artist.username }}</a></p>
+    {% endfor %}
+    <hr>
+  {% endif %}
+
+  {% if artist_list %}
+    <h3>Songs</h3>
+    {% for song in song_list %}
+      <p><a href="{url song_detail song.album.artist.profile.username song.album}">{{ artist.username }}</a></p>
+    {% endfor %}
+  {% endif %}
+</div>
+{% endblock %}
