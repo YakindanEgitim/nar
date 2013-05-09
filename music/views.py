@@ -133,7 +133,7 @@ class SongCreateView(LoginRequiredMixin, ActionMixin, CreateView):
         return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
-        return reverse('artist_detail', kwargs={'username': self.kwargs['username']})
+        return reverse('album_detail', kwargs=self.kwargs)
 
 
 class SongDetailView(DetailView):
@@ -149,6 +149,7 @@ class SongDetailView(DetailView):
 
 class SongUpdateView(LoginRequiredMixin, ActionMixin, UpdateView):
     model = Song
+    form_class = SongForm
     template_name = "music/song_edit.html"
     action = _("Song is successfully updated")
 
@@ -159,4 +160,4 @@ class SongUpdateView(LoginRequiredMixin, ActionMixin, UpdateView):
                                  album__artist__profile__username=self.kwargs.get("username"))
 
     def get_success_url(self):
-        return reverse('song_detail', self.kwargs)
+        return reverse('song_detail', kwargs=self.kwargs)

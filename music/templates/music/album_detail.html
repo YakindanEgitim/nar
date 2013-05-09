@@ -1,7 +1,13 @@
 {% extends "core/base.html" %}
 
 {% block content %}
-<h2>Artist: {{ album.artist.profile.first_name }} {{ artist.profile.last_name }}</h2>
+<h2>
+{% if album.artist.profile.full_name != "" %}
+  {{ album.artist.profile.full_name }}
+{% else %}
+  {{ album.artist.profile.username }}
+{% endif %}
+</h2>
 <hr>
 
 <h3>{{ album.name }}</h3>
@@ -10,4 +16,6 @@
       <li><a href="{% url "song_detail" album.artist.profile.username album.slug song.slug %}">{{ song.name }}</a></li>
     {% endfor %}
 </ul>
+
+<p><a href="{% url 'song_add' album.artist.profile.username album.slug %}" class="btn btn-primary">Add new songs</a></p>
 {% endblock %}

@@ -1,12 +1,19 @@
 {% extends "core/base.html" %}
 
 {% block content %}
-<h2>Artist: {{ song.album.artist.profile.first_name }} {{ artist.profile.last_name }}</h2>
-<h3>Album: {{ song.album.name }}</h3>
+<h2>
+{% if song.album.artist.profile.full_name != "" %}
+  {{ song.album.artist.profile.full_name }}
+{% else %}
+  {{ song.album.artist.profile.username }}
+{% endif %}
+</h2>
+<h3>{{ song.album.name }}</h3>
 <hr>
 
 <h3>{{ song.name }}</h3>
 <p>
     {{song.lyrics}}
 </p>
+<p><a href="{% url 'song_edit' song.album.artist.profile.username song.album.slug song.slug %}" class="btn btn-primary">Edit song</a></p>
 {% endblock %}

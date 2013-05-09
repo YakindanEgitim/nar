@@ -1,7 +1,14 @@
 {% extends "core/base.html" %}
 
 {% block content %}
-<h2>{{ artist.profile.first_name }} {{ artist.profile.last_name }}</h2>
+
+<h2>
+{% if artist.profile.full_name != "" %}
+  {{ artist.profile.full_name }}
+{% else %}
+  {{ artist.profile.username }}
+{% endif %}
+</h2>
 <p>{{ artist.bio }}</p>
 <hr>
 {% if artist.album_set.all %}
@@ -20,4 +27,6 @@
 {% else %}
 <p>No Albums</p>
 {% endif %}
+
+<p><a href="{% url 'album_add' artist.profile.username %}" class="btn btn-primary">Add new albums</a></p>
 {% endblock %}
