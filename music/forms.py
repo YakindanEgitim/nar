@@ -19,6 +19,7 @@ class AlbumForm(ModelForm):
 class SongForm(ModelForm):
     class Meta:
         model = Song
+        fields = ('name', 'lyrics', 'genres',)
 
 ArtistAlbumFormSet = inlineformset_factory(Artist, Album, form=ArtistForm, extra=1)
 AlbumSongFormSet = inlineformset_factory(Album, Song, form=AlbumForm, extra=1)

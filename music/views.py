@@ -112,11 +112,28 @@ class AlbumUpdateView(LoginRequiredMixin, ActionMixin, UpdateView):
         return reverse('album_detail', self.kwargs)
 
 
-class SongCreateView(CreateView):
+class SongCreateView(LoginRequiredMixin, ActionMixin, CreateView):
     model = Song
     form_class = SongForm
     template_name = 'music/song_add.html'
     action = _("Song is successfully added")
+
+    def get_initial(self):
+        return {'album': get_object_or_404(Album,
+                                           slug__exact=self.kwargs.get("album"),
+                                           artist__profile__username=self.kwargs.get("username"))}
+
+    def form_valid(self, form):
+        song = form.save(commit=False)
+        song.album = get_object_or_404(Album,
+                                       slug__exact=self.kwargs.get("album"),
+                                       artist__profile__username=self.kwargs.get("username"))
+        song.slug = slugify(song.name)
+        song.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_success_url(self):
+        return reverse('artist_detail', kwargs={'username': self.kwargs['username']})
 
 
 class SongDetailView(DetailView):
