@@ -53,8 +53,8 @@ class Profile(AbstractUser, AbstractTimeStampedModel):
 class Artist(AbstractTimeStampedModel):
     profile = models.OneToOneField(Profile, primary_key=True)
     bio = models.TextField(default=_(""))
-    genres = models.ManyToManyField('music.Genre')
-    following = models.ManyToManyField('self')
+    genres = models.ManyToManyField('music.Genre', blank=True, null=True)
+    following = models.ManyToManyField('self', blank=True, null=True)
 
 
 class MusicGroup(AbstractTimeStampedModel):
