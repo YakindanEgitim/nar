@@ -1,8 +1,11 @@
 # music/views.py
+import logging
+
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.views.generic import CreateView, DetailView, UpdateView
+from django.utils.text import slugify
 from django.utils.translation import ugettext as _
 
 from braces.views import LoginRequiredMixin
@@ -11,6 +14,8 @@ from core.mixins import ActionMixin
 from profiles.models import Artist
 from .models import Album, Song
 from .forms import *
+
+logger = logging.getLogger(__name__)
 
 
 class ArtistDetailView(DetailView):
@@ -50,17 +55,25 @@ class AlbumCreateView(LoginRequiredMixin, ActionMixin, CreateView):
     action = _("Album is successfully added")
 
     def form_valid(self, form):
+        print "\nFORM VALID\n"
         context = self.get_context_data()
         albumsong_form = context['albumsong_formset']
         if albumsong_form.is_valid():
-            self.object = form.save()
-            albumsong_form.instance = self.object
-            albumsong_form.save()
-            return HttpResponseRedirect(self.get_success_url)
+            self.object = form.save(commit=False)
+            self.object.artist = Artist.objects.get(profile__username__exact=self.kwargs.get("username"))
+            self.object.slug = slugify(self.object.name)
+            self.object.save()
+            for song_form in albumsong_form:
+                song = song_form.save(commit=False)
+                song.slug = slugify(song.name)
+                song.album = self.object
+                song.save()
+            return HttpResponseRedirect(self.get_success_url())
         else:
             return self.render_to_response(self.get_context_data(form=form))
 
     def form_invalid(self, form):
+        print "\nFORM INVALID\n"
         return self.render_to_response(self.get_context_data(form=form))
 
     def get_context_data(self, **kwargs):
@@ -72,7 +85,7 @@ class AlbumCreateView(LoginRequiredMixin, ActionMixin, CreateView):
         return context
 
     def get_success_url(self):
-        return reverse('artist_detail', self.kwargs)
+        return reverse('artist_detail', kwargs=self.kwargs)
 
 
 class AlbumDetailView(DetailView):

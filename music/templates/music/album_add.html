@@ -1,19 +1,6 @@
 {% extends "core/base.html" %}
 {% load i18n %}
 
-<!-- not tested  
-{% block app.scripts %}
-<script src="{{ MEDIA_URL }}js/jquery.formset.js"></script>
-<script type="text/javascript">
-$(function() {
-    $('.form-row.inline.{{ albumsong_formset.prefix }}').formset({
-        prefix: '{{ albumsong_formset.prefix }}',
-    })
-})
-</script>
-{% endblock %}
--->
-
 {% block content %}
 <h1>Add Album</h1>
 <form action="." method="post">
@@ -38,6 +25,7 @@ $(function() {
         {{ form.genres }}
         {{ form.genres.errors }}
     </div>
+    <hr>
     {% endfor %}
 </fieldset>
 <div class="submit-row">
