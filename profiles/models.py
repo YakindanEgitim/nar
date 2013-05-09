@@ -49,13 +49,21 @@ class Profile(AbstractUser, AbstractTimeStampedModel):
         except ObjectDoesNotExist:
             return None
 
+    def full_name(self):
+        return (u"%s %s" % (self.first_name, self.last_name)).trim()
+
+    def __unicode__(self):
+        return u"%s" % (self.username,)
+
 
 class Artist(AbstractTimeStampedModel):
     profile = models.OneToOneField(Profile, primary_key=True)
-    bio = models.TextField(default=_(""))
+    bio = models.TextField(blank=True)
     genres = models.ManyToManyField('music.Genre', blank=True, null=True)
     following = models.ManyToManyField('self', blank=True, null=True)
 
+    def __unicode__(self):
+        return self.profile.__unicode__()
 
 class MusicGroup(AbstractTimeStampedModel):
     members = models.ManyToManyField(Artist)
