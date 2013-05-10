@@ -15,28 +15,18 @@ $(function() {
 -->
 
 {% block content %}
-<h1>Add Artist</h1>
-<form action="." method="post">
-<div class="form-row">
-    {{ form.name.label_tag }}
-    {{ form.name }}
-    {{ form.name.errors }}
-</div>
-<fieldset class="formset">
-<legend>Songs</legend>
-    {{ albumsong_formset.management_form }}
-    {% for form in albumsong_formset %}
-    {{ form.id }}
-    <div class="form-row inline {{ albumsong_formset.prefix }}">
-        {{ form.name.label_tag }}
-        {{ form.name }}
-        {{ form.name.errors }}
-    </div>
-    {% endfor %}
-</fieldset>
-<div class="submit-row">
+
+<div class="span4 offset4">
+
+  <form action="{% url 'artist_add' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    <input type="submit" class="btn btn-primary" value="Add artist" />
+    {% include "core/includes/_form_snippet.html" with form=form %}
+    
+    <p>
+      <input type="submit" class="btn btn-primary" value="Save" />
+    </p>
+  </form>
+
 </div>
-</form>
+
 {% endblock %}

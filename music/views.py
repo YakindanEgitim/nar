@@ -30,7 +30,7 @@ class ArtistUpdateView(LoginRequiredMixin, ActionMixin, UpdateView):
         return get_object_or_404(Artist, profile__username=self.kwargs.get("username"))
 
     def get_success_url(self):
-        return reverse('artist_detail', self.kwargs)
+        return reverse('artist_detail', kwargs=self.kwargs)
 
 
 class ArtistCreateView(LoginRequiredMixin, ActionMixin, CreateView):
@@ -39,10 +39,10 @@ class ArtistCreateView(LoginRequiredMixin, ActionMixin, CreateView):
     template_name = 'music/artist_add.html'
     action = _("Artist is successfully added")
 
-    def form_valid(self, form):
-        pass
+    def get_success_url(self):
+        return reverse('artist_detail', kwargs={"username": self.object.profile.username})
 
-       
+
 class AlbumCreateView(LoginRequiredMixin, ActionMixin, CreateView):
     model = Album
     form_class = AlbumForm
@@ -72,7 +72,7 @@ class AlbumCreateView(LoginRequiredMixin, ActionMixin, CreateView):
         return context
 
     def get_success_url(self):
-        return reverse('artist_detail', self.request.user.username)
+        return reverse('artist_detail', self.kwargs)
 
 
 class AlbumDetailView(DetailView):
