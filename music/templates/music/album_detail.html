@@ -1,0 +1,14 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+<h2>{{ album.artist.profile.first_name }} {{ artist.profile.last_name }}</h2>
+<p>{{ album.artist.bio }}</p>
+<hr>
+
+<h3>{{ album.name }}</h3>
+<ul>
+    {% for song in album.song_set.all %}
+      <li><a href="{% url "song_detail" album.artist.profile.username album.slug song.slug %}">{{ song.name }}</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}
