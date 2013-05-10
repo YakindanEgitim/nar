@@ -3,8 +3,8 @@
   <li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account<b class="caret"></b></a>
     <ul class="dropdown-menu">
-      <li><a href="{% url 'profile' user.username|escape %}">Profile</a></li>
-      <li><a href="{% url 'settings' %}">Settings</a></li>
+      <li><a href="{% url 'profile_detail' %}">Profile</a></li>
+      <li><a href="{% url 'profile_edit' %}">Settings</a></li>
       <li><a href="{% url 'logout' %}">Logout</a></li>
     </ul>
   </li>
