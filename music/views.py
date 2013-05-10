@@ -18,7 +18,7 @@ class ArtistDetailView(DetailView):
     template_name = "music/artist_detail.html"
 
     def get_object(self, queryset=None):
-        return get_object_or_404(Artist, profile__username=self.kwargs["username"])
+        return get_object_or_404(Artist, profile__username=self.kwargs.get("username"))
 
 
 class ArtistUpdateView(LoginRequiredMixin, ActionMixin, UpdateView):
@@ -27,7 +27,7 @@ class ArtistUpdateView(LoginRequiredMixin, ActionMixin, UpdateView):
     action = _("Artist is successfully updated")
 
     def get_object(self, queryset=None):
-        return get_object_or_404(Artist, profile__username=self.kwargs["username"])
+        return get_object_or_404(Artist, profile__username=self.kwargs.get("username"))
 
     def get_success_url(self):
         return reverse('artist_detail', self.kwargs)
@@ -81,8 +81,8 @@ class AlbumDetailView(DetailView):
 
     def get_object(self, queryset=None):
         return get_object_or_404(Album,
-                                 slug=self.kwargs["album"],
-                                 artist__profile__username=self.kwargs["username"])
+                                 slug=self.kwargs.get("album"),
+                                 artist__profile__username=self.kwargs.get("username"))
 
 
 class AlbumUpdateView(LoginRequiredMixin, ActionMixin, UpdateView):
@@ -92,8 +92,8 @@ class AlbumUpdateView(LoginRequiredMixin, ActionMixin, UpdateView):
 
     def get_object(self, queryset=None):
         return get_object_or_404(Album,
-                                 slug=self.kwargs["album"],
-                                 artist__profile__username=self.kwargs["username"])
+                                 slug=self.kwargs.get("album"),
+                                 artist__profile__username=self.kwargs.get("username"))
 
     def get_success_url(self):
         return reverse('album_detail', self.kwargs)
@@ -112,9 +112,9 @@ class SongDetailView(DetailView):
 
     def get_object(self, queryset=None):
         return get_object_or_404(Song,
-                                 slug=self.kwargs["song"],
-                                 album__slug=self.kwargs["album"],
-                                 album__artist__profile__username=self.kwargs["username"])
+                                 slug=self.kwargs.get("song"),
+                                 album__slug=self.kwargs.get("album"),
+                                 album__artist__profile__username=self.kwargs.get("username"))
 
 
 class SongUpdateView(LoginRequiredMixin, ActionMixin, UpdateView):
@@ -124,9 +124,9 @@ class SongUpdateView(LoginRequiredMixin, ActionMixin, UpdateView):
 
     def get_object(self, queryset=None):
         return get_object_or_404(Song,
-                                 slug=self.kwargs["song"],
-                                 album__slug=self.kwargs["album"],
-                                 album__artist__profile__username=self.kwargs["username"])
+                                 slug=self.kwargs.get("song"),
+                                 album__slug=self.kwargs.get("album"),
+                                 album__artist__profile__username=self.kwargs.get("username"))
 
     def get_success_url(self):
         return reverse('song_detail', self.kwargs)
