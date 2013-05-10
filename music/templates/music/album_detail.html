@@ -1,8 +1,7 @@
 {% extends "core/base.html" %}
 
 {% block content %}
-<h2>{{ album.artist.profile.first_name }} {{ artist.profile.last_name }}</h2>
-<p>{{ album.artist.bio }}</p>
+<h2>Artist: {{ album.artist.profile.first_name }} {{ artist.profile.last_name }}</h2>
 <hr>
 
 <h3>{{ album.name }}</h3>
