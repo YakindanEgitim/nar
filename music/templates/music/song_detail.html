@@ -1,0 +1,12 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+<h2>Artist: {{ song.album.artist.profile.first_name }} {{ artist.profile.last_name }}</h2>
+<h3>Album: {{ song.album.name }}</h3>
+<hr>
+
+<h3>{{ song.name }}</h3>
+<p>
+    {{song.lyrics}}
+</p>
+{% endblock %}
